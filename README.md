@@ -1,6 +1,9 @@
 # home-bin-tools
 Tools to be located in ~/bin
 
+gfp4f.sh
+	Create sparse patch series based on presence of given file in
+	the changes.
 gg2show.sh
 	Find commit(s) by output from `git grep`.
 gm4set.sh
