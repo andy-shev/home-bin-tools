@@ -4,6 +4,10 @@ Tools to be located in _~/bin_.
 Some of the scripts are too old or implemented in suboptimal way. I will be
 glad to accept pull requests to make them better.
 
+###### gc4name.sh
+
+Create patch series on file basis.
+
 ###### gfp4f.sh
 
 Create sparse patch series based on presence of given file in the changes.
