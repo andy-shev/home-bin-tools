@@ -8,6 +8,10 @@ glad to accept pull requests to make them better.
 
 Create patch series on file basis.
 
+###### ge2maintainer.sh
+
+Send patch series to the registered maintainers in Cc list.
+
 ###### gfp4f.sh
 
 Create sparse patch series based on presence of given file in the changes.
