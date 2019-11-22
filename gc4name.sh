@@ -6,9 +6,16 @@ MSG="fixup"
 	shift
 }
 
-pattern="^.M "
 message="$MSG"
 
-git status --porcelain=1 | sed -e "/$pattern/ s/$pattern//" | while read file; do
-	git commit -s -m "$file: $message" $file
+git status --porcelain=1 | while read status file; do
+	action=""
+	case $status in
+		M[\ MD]) action="updated" ;;
+		A[\ MD]) action="added" ;;
+		D) action="deleted" ;;
+		R[\ MD]) action="renamed" ;;
+		C[\ MD]) action="copied" ;;
+	esac
+	git commit -s -m "$file ($action): $message" -- $file
 done
