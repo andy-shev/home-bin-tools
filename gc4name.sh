@@ -11,11 +11,11 @@ message="$MSG"
 git status --porcelain=1 | while read status file; do
 	action=""
 	case $status in
-		M[\ MD]) action="updated" ;;
-		A[\ MD]) action="added" ;;
+		M*) action="updated" ;;
+		A*) action="added" ;;
 		D) action="deleted" ;;
-		R[\ MD]) action="renamed" ;;
-		C[\ MD]) action="copied" ;;
+		R*) action="renamed" ;;
+		C*) action="copied" ;;
 	esac
 	git commit -s -m "$file ($action): $message" -- $file
 done
