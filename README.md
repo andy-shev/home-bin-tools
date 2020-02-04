@@ -16,6 +16,10 @@ Create sparse patch series based on presence of given file in the changes.
 
 Find commit(s) by output from `git grep`.
 
+###### gl4func.sh
+
+Print files that contain given word(s).
+
 ###### gm4set.sh
 
 Prepare a list of maintainers and mailing list for patches in local tree.
