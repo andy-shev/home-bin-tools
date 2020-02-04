@@ -24,9 +24,9 @@ while [ $# -gt 1 ]; do
 	shift
 done
 
-# To get full diff: git log --full-diff -p -- ${1+$@}
+# To get full diff: git log --full-diff -p -- "$@"
 
-commits=$(git log -n $count --reverse --pretty="format:%H" ${branch} -- ${1+$@})
+commits=$(git log -n $count --reverse --pretty="format:%H" ${branch} -- "$@")
 
 x=1
 for i in $commits; do
