@@ -18,7 +18,7 @@ Create sparse patch series based on presence of given file in the changes.
 
 ###### gg2show.sh
 
-Find commit(s) by output from `git grep`.
+Find commit(s) by output from `git grep [commit] -- <file>`.
 
 ###### gl4func.sh
 

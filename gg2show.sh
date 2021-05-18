@@ -1,9 +1,12 @@
 #!/bin/sh
 
 #
-# Find commit(s) by output from `git grep`.
+# Find commit(s) by output from `git grep [commit] -- <file>`.
 # Usage:
-#	$PROG <file>:<line>
+#	$PROG [commit:]<file>:<line>
+#
+# Alternative variant:
+#	$PROG <file> <commit> <line>
 #
 # Author: Andy Shevchenko <andy.shevchenko@gmail.com>
 # SPDX-License-Identifier:	GPL-2.0+
@@ -13,12 +16,22 @@
 
 arg="$1"; shift
 
-file=$(echo "$arg" | cut -f1 -d':')
-line=$(echo "$arg" | cut -f2 -d':')
+a=$(echo "$arg" | cut -f1 -d':')
+b=$(echo "$arg" | cut -s -f2 -d':')
+c=$(echo "$arg" | cut -s -f3 -d':')
+
+if git rev-parse --verify -q "$a"; then
+	base="$a"
+	file="$b"
+	line="$c"
+else
+	base="HEAD"
+	file="$a"
+	line="$b"
+fi
 
 [ -z "$line" ] && line="$2"
 
-base="HEAD"
 [ "$#" -ge 1 ] && {
 	base="$1"
 	shift
