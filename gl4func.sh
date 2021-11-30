@@ -17,7 +17,7 @@
 grep_for_func() {
 	local func="$1"; shift
 
-	git grep -n -w "$func" -- "$@" | cut -f1 -d':' | sort -u
+	git grep -lw "$func" -- "$@"
 }
 
 result=
