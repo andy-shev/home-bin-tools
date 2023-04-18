@@ -29,9 +29,9 @@ done
 [ $# -ge 1 ] || exit 1
 COMMIT="$1"; shift
 
-OPTS="--no-roles --no-rolestats --remove-duplicates --git --git-min-percent=67 $options"
+OPTS="--no-roles --no-rolestats --remove-duplicates --git --git-min-percent=67 --nomultiline $options"
 
-to=$(git show -$count "$COMMIT" | scripts/get_maintainer.pl $OPTS --no-m --no-r | tr '\n' ',')
-cc=$(git show -$count "$COMMIT" | scripts/get_maintainer.pl $OPTS --no-l | tr '\n' ',')
+to=$(git show -$count "$COMMIT" | scripts/get_maintainer.pl $OPTS --no-m --no-r)
+cc=$(git show -$count "$COMMIT" | scripts/get_maintainer.pl $OPTS --no-l)
 
 git send-email -M -C -v$version -n$count --to="$to" --cc="$cc" "$@" "$COMMIT"
