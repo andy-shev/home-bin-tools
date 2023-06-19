@@ -22,7 +22,7 @@ MSG="fixup"
 
 message="$MSG"
 
-git status --porcelain=1 | while read status file; do
+git status --porcelain=1 | while read status file1 sep file2; do
 	action=""
 	case $status in
 		M*) action="updated" ;;
@@ -31,5 +31,5 @@ git status --porcelain=1 | while read status file; do
 		R*) action="renamed" ;;
 		C*) action="copied" ;;
 	esac
-	git commit -s -m "$file ($action): $message" -- $file
+	git commit -s -m "$file1 ($action): $message" -- $file1 $file2
 done
