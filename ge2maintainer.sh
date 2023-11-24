@@ -34,4 +34,6 @@ OPTS="--no-roles --no-rolestats --remove-duplicates --git --git-min-percent=67 -
 to=$(git show -$count "$COMMIT" | scripts/get_maintainer.pl $OPTS --no-m --no-r)
 cc=$(git show -$count "$COMMIT" | scripts/get_maintainer.pl $OPTS --no-l)
 
-git send-email -M -C -v$version -n$count --to="$to" --cc="$cc" "$@" "$COMMIT"
+[ -n "$count" -a "$count" -gt 1 ] && SEOPTS="--annotate --cover-letter" || SEOPTS=""
+
+git send-email -M -C -v$version -n$count --to="$to" --cc="$cc" $SEOPTS "$@" "$COMMIT"
