@@ -110,7 +110,7 @@ update_branches() {
 
 	are_bases_equal "$branch" "$local/$branch" && return
 
-	for b in $(git branch --contains "$local/$branch" | cut -c3- | grep -v "^$branch$"); do
+	for b in $(git branch --contains "$local/$branch" --format='%(refname:short)' | grep -v "^$branch$"); do
 		do_update "$branch" "$local/$branch" "$b"
 	done
 }
