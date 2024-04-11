@@ -21,6 +21,7 @@ MSG="fixup"
 }
 
 message="$MSG"
+tld="$(git rev-parse --show-toplevel)"
 
 git status --porcelain=1 | while read status file1 sep file2; do
 	action=""
@@ -31,5 +32,7 @@ git status --porcelain=1 | while read status file1 sep file2; do
 		R*) action="renamed" ;;
 		C*) action="copied" ;;
 	esac
-	git commit -s -m "$file1 ($action): $message" -- $file1 $file2
+	f1=$(realpath "$tld/$file1" --relative-to="$PWD")
+	f2=$(realpath "$tld/$file2" --relative-to="$PWD")
+	git commit -s -m "$file1 ($action): $message" -- $f1 $f2
 done
