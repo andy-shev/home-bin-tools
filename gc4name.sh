@@ -32,7 +32,13 @@ git status --porcelain=1 | while read status file1 sep file2; do
 		R*) action="renamed" ;;
 		C*) action="copied" ;;
 	esac
-	f1=$(realpath "$tld/$file1" --relative-to="$PWD")
-	f2=$(realpath "$tld/$file2" --relative-to="$PWD")
-	git commit -s -m "$file1 ($action): $message" -- $f1 $f2
+	shortmsg="$file1 ($action): $message"
+	if [ -n "$file2" ]; then
+		f1=$(realpath "$tld/$file1" --relative-to="$PWD")
+		f2=$(realpath "$tld/$file2" --relative-to="$PWD")
+		git commit -s -m "$shortmsg" -- $f1 $f2
+	else
+		f1=$(realpath "$tld/$file1" --relative-to="$PWD")
+		git commit -s -m "$shortmsg" -- $f1
+	fi
 done
